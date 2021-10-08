@@ -8,13 +8,15 @@ export const getRegister = (req, res) => {
 
 export const postRegister = async (req, res) => {
   console.log(`Username: ${req.body.username}, password: ${req.body.password}`)
-  console.log(findUser(req.body.username))
-  try {
-    await bcrypt.hash(req.body.password, 10).then((hashedPassword) => {
-      registerUser(req.body.username, hashedPassword)
-    })
-  } catch (error) {
-    console.log(error)
-  }
-  res.redirect('/login')
+  findUser(req.body.username).then((result) => {
+    if (result !== null) {
+      console.log('Usuario ja existe')
+      res.redirect('/register')
+    } else {
+      bcrypt.hash(req.body.password, 10).then((hashedPassword) => {
+        registerUser(req.body.username, hashedPassword)
+        res.redirect('/login')
+      })
+    }
+  })
 }

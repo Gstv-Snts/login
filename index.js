@@ -13,7 +13,11 @@ const PORT = 5000
 
 app.use('/', router)
 
-mongoose.connect(dbURL).then(() => {
-  console.log('Conectado ao banco')
-})
-app.listen(PORT, console.log(`ABERTO EM http://localhost:${PORT}`))
+mongoose
+  .connect(dbURL)
+  .then(() => {
+    console.log('Conectado ao banco')
+  })
+  .then(() => {
+    app.listen(PORT, console.log(`ABERTO EM http://localhost:${PORT}`))
+  })

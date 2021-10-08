@@ -1,4 +1,5 @@
 import UserSchema from '../model/userSchema.js'
+import mongoose from 'mongoose'
 
 export const registerUser = async (username, password) => {
   try {
@@ -12,11 +13,5 @@ export const registerUser = async (username, password) => {
 }
 
 export const findUser = async (username) => {
-  try {
-    await UserSchema.findOne({ username: username }).then((user) => {
-      return user.data
-    })
-  } catch (error) {
-    console.log(error)
-  }
+  return await UserSchema.findOne({ username })
 }
