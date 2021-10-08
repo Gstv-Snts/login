@@ -1,5 +1,6 @@
 import UserSchema from '../model/userSchema.js'
 import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
 
 export const registerUser = async (username, password) => {
   try {
@@ -12,6 +13,20 @@ export const registerUser = async (username, password) => {
   }
 }
 
-export const findUser = async (username) => {
+export const findUserByUsername = async (username) => {
   return await UserSchema.findOne({ username })
+}
+
+export const compareHashedPassword = async (password, hashedPassword) => {
+  return await bcrypt.compare(password, hashedPassword)
+}
+
+export const login = async (username, password) => {
+  const user = await findUserByUsername(username)
+  if (user !== null) {
+    const passAuth = await compareHashedPassword(password, user.password)
+    return passAuth
+  } else {
+    return false
+  }
 }
