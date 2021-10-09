@@ -11,7 +11,7 @@ app.set('view engine', 'ejs')
 
 const PORT = 5000
 
-app.use('/', router)
+app.use(router)
 
 mongoose
   .connect(dbURL)
