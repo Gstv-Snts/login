@@ -1,4 +1,4 @@
-import UserSchema from '../model/userSchema.js'
+import { SessionSchema, UserSchema } from '../model/userSchema.js'
 
 export const registerUser = async (username, password) => {
   try {
@@ -13,4 +13,7 @@ export const registerUser = async (username, password) => {
 
 export const findUserByUsername = async (username) => {
   return await UserSchema.findOne({ username })
+}
+export const findUserById = async (id) => {
+  return await UserSchema.findOne({ id })
 }

@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "sess": "nodemon sessions.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,18 @@
   "homepage": "https://github.com/Gstv-Snts/login#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "connect": "^3.7.0",
     "connect-mongo": "^4.6.0",
+    "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-session": "^1.17.2",
-    "mongoose": "^6.0.9"
+    "flash": "^1.1.0",
+    "mongo": "^0.1.0",
+    "mongoose": "^6.0.9",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"

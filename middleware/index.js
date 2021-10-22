@@ -1,21 +1,35 @@
-import session from 'express-session'
-import MongoStore from 'connect-mongo'
 import bcrypt from 'bcrypt'
-import { sessionSecret, dbURL } from '../config/secrets.js'
-import { findUserByUsername } from '../db/index.js'
+import localStrategy from 'passport-local'
 
-export const createSession = (username) => {
-  session({
-    secret: sessionSecret,
-    store: MongoStore.create({ mongoUrl: dbURL }),
-  })
+const LocalStrategy = localStrategy.Strategy
+
+export const comparePassword = async (password, hashedPassword) => {
+  return await bcrypt.compare(password, hashedPassword)
 }
 
-export const login = async (username, password) => {
-  const user = await findUserByUsername(username)
-  if (user !== null && (await bcrypt.compare(password, user.password))) {
-    return true
-  } else {
-    return false
+export function initialize(passport, findUserByUsername, findUserById) {
+  const authenticateUser = async (username, password, done) => {
+    const user = await findUserByUsername(username)
+    if (user == null) {
+      return done(null, false, { message: `User do not exist!` })
+    }
+
+    try {
+      if (await comparePassword(password, user.password)) {
+        return done(null, user)
+      } else {
+        return done(null, false, { message: 'Password incorrect!' })
+      }
+    } catch (e) {
+      return done(e)
+    }
   }
+
+  passport.use(
+    new LocalStrategy({ usernameField: 'username' }, authenticateUser)
+  )
+  passport.serializeUser((user, done) => done(null, user.id))
+  passport.deserializeUser((id, done) => {
+    return done(null, findUserById(id))
+  })
 }

@@ -5,5 +5,7 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   date: { type: Date, default: Date.now },
 })
+const sessionSchema = mongoose.Schema({})
 
-export default mongoose.model('users', userSchema)
+export const UserSchema = mongoose.model('users', userSchema)
+export const SessionSchema = mongoose.model('sessions', sessionSchema)
