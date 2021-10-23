@@ -8,11 +8,13 @@ import passport from 'passport'
 import { findUserByUsername, findUserById } from './db/index.js'
 import MongoStore from 'connect-mongo'
 import flash from 'express-flash'
+import helmet from 'helmet'
 
 const app = express()
 
 initialize(passport, findUserByUsername, findUserById)
 
+app.use(helmet())
 app.use(express.urlencoded({ extended: false }))
 app.set('views', './views')
 app.set('view engine', 'ejs')
