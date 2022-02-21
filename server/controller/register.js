@@ -1,18 +1,16 @@
 import { registerUser, findUserByUsername } from '../db/index.js'
 import bcrypt from 'bcrypt'
 
-export const getRegister = (req, res) => {
-  res.render('register')
-}
-
 export const postRegister = async (req, res) => {
   findUserByUsername(req.body.username).then((result) => {
     if (result !== null) {
-      res.redirect('/register')
+      console.log("digita alguma coisa kekweijk");
+      res.status(404)
     } else {
       bcrypt.hash(req.body.password, 10).then((hashedPassword) => {
         registerUser(req.body.username, hashedPassword)
-        res.redirect('/login')
+        res.status(200);
+        console.log("usaurio criadoowedkd");
       })
     }
   })

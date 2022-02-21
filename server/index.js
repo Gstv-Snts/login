@@ -1,7 +1,7 @@
 import express from 'express'
 import router from './routes/index.js'
 import mongoose from 'mongoose'
-import { dbURL, sessionSecret } from './config/secrets.js'
+import { dbURL, sessionSecret } from './config/config.js'
 import session from 'express-session'
 import { initialize } from './middleware/index.js'
 import passport from 'passport'

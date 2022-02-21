@@ -1,3 +1,3 @@
 export const getLogin = (req, res) => {
-  res.render('login')
+  res.send("iewfif")
 }

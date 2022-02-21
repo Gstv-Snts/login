@@ -1,7 +1,6 @@
 import express from 'express'
-import { getRegister, postRegister } from '../controller/register.js'
+import { postRegister } from '../controller/register.js'
 import { getLogin } from '../controller/login.js'
-import { getMainPage, disconnectUser } from '../controller/mainpage.js'
 import passport from 'passport'
 
 const router = express.Router()
@@ -20,10 +19,7 @@ function checkNotAuthenticated(req, res, next) {
   }
   next()
 }
-
-router.get('/register', checkNotAuthenticated, getRegister)
 router.post('/register', checkNotAuthenticated, postRegister)
-router.get('/login', checkNotAuthenticated, getLogin)
 router.post(
   '/login',
   checkNotAuthenticated,
@@ -33,7 +29,5 @@ router.post(
     failureFlash: true,
   })
 )
-router.get('/', checkAuthenticated, getMainPage)
-router.post('/logout', disconnectUser)
 
 export default router
