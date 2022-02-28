@@ -1,7 +1,7 @@
-import { findUserByUsername, findUserById } from '../db/index.js'
+import { findUserByUsername, findUserById } from '../db/index'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { tokenSecret } from '../config/config.js'
+import { tokenSecret } from '../config/config'
 export const postLogin = async (req, res, nex) => {
   try {
 

@@ -1,6 +1,5 @@
-import { registerUser, findUserByUsername } from '../db/index.js'
+import { registerUser, findUserByUsername } from '../db/index'
 import bcrypt from 'bcrypt'
-
 export const postRegister = async (req, res) => {
   console.log(req.body.username);
   console.log(req.body.password);

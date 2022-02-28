@@ -1,4 +1,4 @@
-import { SessionSchema, UserSchema } from '../model/userSchema.js'
+import { SessionSchema, UserSchema } from '../model/userSchema'
 
 export const registerUser = async (username, password) => {
   try {

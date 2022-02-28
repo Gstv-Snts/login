@@ -1,7 +1,7 @@
 import express from 'express'
-import router from './routes/index.js'
+import router from './routes/index'
 import mongoose from 'mongoose'
-import { dbURL } from './config/config.js'
+import { dbURL } from './config/config'
 import helmet from 'helmet'
 import cors from 'cors'
 
