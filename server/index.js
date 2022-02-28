@@ -1,38 +1,21 @@
 import express from 'express'
 import router from './routes/index.js'
 import mongoose from 'mongoose'
-import { dbURL, sessionSecret } from './config/config.js'
-import session from 'express-session'
-import { initialize } from './middleware/index.js'
-import passport from 'passport'
-import { findUserByUsername, findUserById } from './db/index.js'
-import MongoStore from 'connect-mongo'
-import flash from 'express-flash'
+import { dbURL } from './config/config.js'
 import helmet from 'helmet'
+import cors from 'cors'
+
 
 const app = express()
-
-initialize(passport, findUserByUsername, findUserById)
-
+app.use(cors())
+app.use(express.json())
 app.use(helmet())
 app.use(express.urlencoded({ extended: false }))
-app.set('views', './views')
-app.set('view engine', 'ejs')
-app.use(flash())
-app.use(
-  session({
-    secret: sessionSecret,
-    resave: false,
-    saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: dbURL }),
-  })
-)
-app.use(passport.initialize())
-app.use(passport.session())
 
 const PORT = 5000
 
 app.use('/', router)
+
 
 mongoose
   .connect(dbURL)
