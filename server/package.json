@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.ts",
-    "sess": "nodemon sessions.js"
+    "test": "jest --watchAll"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Gstv-Snts/login#readme",
   "dependencies": {
+    "@babel/core": "^7.17.5",
     "bcrypt": "^5.0.1",
     "connect": "^3.7.0",
     "connect-mongo": "^4.6.0",
@@ -30,7 +31,6 @@
     "express-session": "^1.17.2",
     "flash": "^1.1.0",
     "helmet": "^4.6.0",
-    "jest": "^27.5.1",
     "jsonwebtoken": "^8.5.1",
     "mongo": "^0.1.0",
     "mongoose": "^6.2.3",
@@ -40,7 +40,15 @@
     "ts-node": "^10.5.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.1",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
     "nodemon": "^2.0.13",
     "typescript": "^4.5.5"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
